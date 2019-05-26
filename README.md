@@ -81,6 +81,7 @@ All experiment holds k=3
 dataset size= 100 documents
 training size = 80 documents
 test size = 20 documents
+
 |Algorithm| m       | Accuracy           | Time (seconds)  |speedup
 |---------| ------------- |:-------------:| -----:|-----:|
 |Exhaustive WMD| not applicable | 0.9 | 723.75| - |
@@ -95,6 +96,7 @@ test size = 20 documents
 dataset size= 184 documents (25% of the original dataset)
 training size = 147 documents
 test size = 37 documents
+
 |Algorithm| m       | Accuracy           | Time  |speedup
 |---------| ------------- |:-------------:| -----:|-----:|
 |Exhaustive WMD| not applicable | 0.91 | 2345.71| - |
