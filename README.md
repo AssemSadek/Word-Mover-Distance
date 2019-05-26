@@ -78,8 +78,8 @@ I run these experiments on my modest computer, thus I didn't have the luxury to 
 All experiment holds k=3
 
 #### Experiment 1:
-dataset size= 100 documents
-training size = 80 documents
+dataset size= 100 documents - 
+training size = 80 documents - 
 test size = 20 documents
 
 |Algorithm| m       | Accuracy           | Time (seconds)  |speedup
@@ -93,8 +93,8 @@ test size = 20 documents
 |prefetch and prune| n (exact) | 0.9|  747.79| 1x|
 
 #### Experiment 2:
-dataset size= 184 documents (25% of the original dataset)
-training size = 147 documents
+dataset size= 184 documents (25% of the original dataset) - 
+training size = 147 documents - 
 test size = 37 documents
 
 |Algorithm| m       | Accuracy           | Time  |speedup
@@ -109,8 +109,8 @@ test size = 37 documents
 
 
 #### Experiment 3 (not completed yet):
-dataset size= 737 documents (100% of the original dataset)
-training size = 589 documents
+dataset size= 737 documents (100% of the original dataset) - 
+training size = 589 documents - 
 test size = 148 documents
 
 In this experiment I compare the results with the RWMD version
