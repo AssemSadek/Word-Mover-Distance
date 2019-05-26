@@ -1,4 +1,4 @@
-#Word Mover Distance
+# Word Mover Distance
 This code is an implementation of the Word Mover Distance and its variations described in its [original paper](http://proceedings.mlr.press/v37/kusnerb15.pdf)
 
 The functions was tested over the public dataset BBCSport News. To download it, please refer to this [link](http://mlg.ucd.ie/datasets/bbc.html)
@@ -7,27 +7,27 @@ The raw version of this dataset will be needed, in order to reproduce the same e
 
 I will explain the main component of this expirement, and then the analysis of the result.
 
-###Class Word Mover Distance
+### Class Word Mover Distance
 In this core class, the variations of the Word Mover Distance and the given prefetch and prune algorithm provided in the paper are implemented, in addition to some other helpers functons that could be found in the same python file of the class.
 
-####Important methods
+#### Important methods
 In this section I will explain the important methods used for document matching and document classifications, in addition to the complexity for each method.
 
 To know how to use these functions, please refer to the detailed inline documentation provided in source code word_mover_distance.py
 
-#####WMD(doc_1,doc_2)
+##### WMD(doc_1,doc_2)
 This function is just a wrapper for the provided wmdistance(doc_1, doc_2) function in gensim package
 
 The complexity of this function will be similar to the mentioned in the paper due to solving the linear programming optimization problem which is $O(p^3log(p))$
 
-#####WCD(doc_1,doc_2)
+##### WCD(doc_1,doc_2)
 In this function, the word centroid distance is calculated by using these steps:
 1. calculate the nBoW of each document to get a dictionary that pair every unique word in the document with its frequency $d_i$ within the document. (complexity = 2L, where L is length of the document)
 2. calculate the centroid for every document alone, This is done by a weighted sum over all the word embedding vectors of each words in the document, the weight correspond to the mentioned frequency $d_i$ in the calculated nBoW. (complexity = dp where d is the length of every vector and p is the number of every unique element in the document)
 3. After having the two documents centroids, we calculate the L2 norm of the difference between the two centroids vectors. (complexity = d)
 
 The total exact complexity is 2L + dp + d. Thus $O(dp)$
-#####RWMD_one_constraint(doc_1,doc_2)
+##### RWMD_one_constraint(doc_1,doc_2)
 In this function, the relaxed version of Word Mover Distance is calculated by using one constraint only which is corresponding to doc_1.
 1. calculate again the nBoW of each document.
 2. for every unique word in document 1, find the minimum distance with the second document by calculating the distance with every unique word in document 2 and then multiply it with $d_i$ (complexity = $p^2$)
