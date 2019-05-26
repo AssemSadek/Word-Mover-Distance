@@ -34,20 +34,20 @@ In this function, the relaxed version of Word Mover Distance is calculated by us
 3. accumulating all the weighted minimum distances to get the RWMD
 
 It's easy to demonstrate that the complexity is $O(p^2)$
-#####RWMD(doc_1,doc_2)
+##### RWMD(doc_1,doc_2)
 In this function we used the previous function to get the final relaxed word mover distance:
 1. calculate RWMD with constraint on doc_1
 2. calculate RWMD with constraint on doc_2
 3. take the maximum distance
    
 The complexity is the same as with one constraint.
-#####kNN_exhaustive_WMD(query,docs, k)
+##### kNN_exhaustive_WMD(query,docs, k)
 Since we now have a distance function between two documents which is the word mover distance, we can use it to calculate the normal kNN algorithm by replacing the normal L2 euclidean distance function in the classical kNN algorithm by wmd(doc_1, doc_2) function
 
 The complexity of this algorithm will be $O(N* p^3log(p))$, where N is the number of the training set, since we will calculate WMD N times.
-#####kNN_RWMD(query,docs, k)
+##### kNN_RWMD(query,docs, k)
 Same as the previous algorithm but we will replace the wmd function with rwmd function. Thus, the complexity will drop to $O(N*p^2)$
-#####kNN_prefetch_and_prune(query,docs, k, m)
+##### kNN_prefetch_and_prune(query,docs, k, m)
 With the description of the algorithm in the paper, the implementation is as follow:
 1. calculate WCD for all documents in the training set with the query document. (complexity = N*dp)
 2. if m == k, stop the algorithm and return the WMD minimum distances with the corresponding indices that represent the nearest documents in the training sets.
@@ -61,23 +61,23 @@ The complexity of this algorithm:
 - Worst case scenario, when m = N and every time get into the final step of calculating WMD and replacing documents: $O(N*p^3log(p))$, like the exhaustive WMD
 
 
-###BBCSport Data Loader
+### BBCSport Data Loader
 This class is helpful to load, process and manage the raw dataset of BBC sport which was used to run some experiments on the mentioned algorithms
 
 The most important function is train_test_split. A detailed documentation will be found in the source code of the class.
-###kNN Classifier
+### kNN Classifier
 this class is a wrapper for the kNN algorithms provided by WordMoverDistance class. It use mainlly to function:
 - train(x_train, y_train): This is like any kNN classifier's train function, just store the training data.
 - predict(x_test, k, m, algorithm): In this function we choose which kNN algorithm from WordMoverDistance to run on the x_test
 
 
-###Experiment results and interpretations
+### Experiment results and interpretations
 
 I run these experiments on my modest computer, thus I didn't have the luxury to run it in parallel on multiple core. It took a huge time to compute kNN on all the data. Therefore, I decide to run it on a portions of the dataset. 
 
 All experiment holds k=3
 
-####Experiment 1:
+#### Experiment 1:
 dataset size= 100 documents
 training size = 80 documents
 test size = 20 documents
@@ -91,7 +91,7 @@ test size = 20 documents
 |prefetch and prune| 8k |0.9 | 334.45 |2x|
 |prefetch and prune| n (exact) | 0.9|  747.79| 1x|
 
-####Experiment 2:
+#### Experiment 2:
 dataset size= 184 documents (25% of the original dataset)
 training size = 147 documents
 test size = 37 documents
@@ -106,7 +106,7 @@ test size = 37 documents
 |prefetch and prune| n (exact) | 0.89 | 2427.41|1x|
 
 
-####Experiment 3 (not completed yet):
+#### Experiment 3 (not completed yet):
 dataset size= 737 documents (100% of the original dataset)
 training size = 589 documents
 test size = 148 documents
@@ -124,5 +124,5 @@ In this experiment I compare the results with the RWMD version
 |Exhaustive WMD| not applicable | 0.91 | -| - |
 
 
-####Interpretation
+#### Interpretation
 We can see a tradeoff between accuracy and the speedup. I believe that my implementation could be more optimized. specially for the exact version of the prefetch and prune.
